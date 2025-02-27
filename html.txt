@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статус заказа</title>
+</head>
+<body>
+    <h1>Заказ: {{ unique_code }}</h1>
+    <p>Количество: {{ quantity }}</p>
+    <p>Статус: {{ status }}</p>
+    <a href="{{ oplata_url }}">Перейти в чат продавца</a>
+
+    {% if remaining_time %}
+        <p>Таймер: <span id="timer">{{ remaining_time }}</span> секунд</p>
+        <script>
+            let timer = document.getElementById("timer");
+            function updateTimer() {
+                let time = parseInt(timer.innerText);
+                if (time > 0) {
+                    timer.innerText = time - 1;
+                    setTimeout(updateTimer, 1000);
+                }
+            }
+            updateTimer();
+        </script>
+    {% endif %}
+</body>
+</html>
